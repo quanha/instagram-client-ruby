@@ -2,7 +2,7 @@
   <div class="panel-heading">
     <div class="row">
       <div class="col-md-3">
-        <%= image_tag('Instagram_icon.png', :class => 'icon') %>
+        <%= link_to image_tag('Instagram_icon.png', :class => 'icon'), instagram_feed_url %>
       </div>
       <div class="col-md-3 col-md-offset-6">
         <%= @user.username %>
