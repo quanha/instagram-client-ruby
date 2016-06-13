@@ -14,6 +14,8 @@
 }
 
 .images{
+    max-width: 150px;
+    max-height: 150px;
     margin-top: 10px;
     margin-right: 10px
 }
@@ -21,4 +23,21 @@
 .content{
     margin-left: 10px;
     margin-right: 10px;
+}
+
+ul.captions {
+    margin:auto;
+    list-style:none;
+    padding:0;
+    margin-left: 25px;
+}
+ul.captions li{
+    float: left;
+    margin-left: 10px ;
+    max-width: 150px;
+    display: inline-block;
+}
+ul.captions li p{
+    word-break: break-word;
+    margin-top: 10px;
 }

@@ -13,11 +13,16 @@
   <div class="panel-body">
     <%= 'Hi ' + @user.full_name%>
     <hr>
-
-    <% @recent_media_items.each do |media| %>
-        <%= image_tag (media.images.thumbnail.url), :class => 'images' %>
-    <% end%>
-
+    <div class="row">
+      <ul class="captions">
+        <% @recent_media_items.each do |media| %>
+            <li>
+              <%= image_tag (media.images.standard_resolution.url), :class => 'images' %>
+            </li>
+        <% end %>
+      </ul>
+    </div>
+    <br>
     <hr>
     <%= link_to 'Search for hash tags here', :controller => 'instagram', :action => 'tags'%><br>
     <%= link_to 'Logout', :controller => 'session', :action => 'logout'%>

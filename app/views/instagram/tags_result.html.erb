@@ -1,8 +1,8 @@
-<div class="panel panel-primary" xmlns="http://www.w3.org/1999/html">
+<div class="panel panel-primary">
   <div class="panel-heading">
     <div class="row">
       <div class="col-md-3">
-        <%= image_tag('Instagram_icon.png', :class => 'icon') %>
+        <%= link_to image_tag('Instagram_icon.png', :class => 'icon'), instagram_feed_url %>
       </div>
       <div class="col-md-3 col-md-offset-6">
         <%= @user.username %>
@@ -11,59 +11,19 @@
     </div>
   </div>
   <div class="panel-body">
-    <%= 'Top Commented Instagrammer using ' + @hashtag%>
+    <h4>Images for tag: #<%= params[:hashtag]%></h4>
     <hr>
-    <%
-    j = 9
-    if (@instagrammers.count < 10)
-      j = @instagrammers.count - 1
-    end
-    %>
-      <table class="table table-condensed table-striped .table-bordered">
-        <thead>
-        <tr>
-        <th style="width:20%">Order</th>
-            <th style="width:50%">Instagrammer</th>
-        <th style="width:30%">Comment Count</th>
-          </tr>
-        </thead>
-        <tbody>
-        <% for k in 0..j%>
-          <tr>
-            <td><%= k+1 %></td>
-            <td><%= @instagrammers[k][0] %></td>
-            <td><%= @instagrammers[k][1] %></td>
-          </tr>
+    <div class="row">
+      <ul class="captions">
+        <% @posts.each do |media| %>
+            <li>
+              <%= image_tag (media.images.standard_resolution.url), :class => 'images' %>
+            </li>
         <% end %>
-        </tbody>
-      </table>
+      </ul>
+    </div>
     <hr>
-    <table class="table table-condensed table-striped .table-bordered" style="margin-bottom: -20px">
-      <thead>
-      <tr>
-        <th style="width:20%">Instagrammer</th>
-        <th style="width:50%">Caption/Comment</th>
-        <th style="width:30%">Date</th>
-      </tr>
-      </thead>
-      <tbody>
-      <% for item in @posts%>
-          <tr>
-            <td><%= item[0] %></td>
-            <td><%= item[1] %></td>
-            <td><%= Time.at(Integer(item[2])).strftime("%H:%M:%S %d/%b/%Y") %></td>
-          </tr>
-      <% end %>
-      </tbody>
-    </table>
-    <center><%= will_paginate @posts %></center>
-    <hr>
-    <%= link_to 'Back to Hashtag Page', :controller => 'instagram', :action => 'tags'%><br>
-    <%= link_to 'Back to Home Page', :controller => 'instagram', :action => 'feed'%><br>
+    <%= link_to 'Search for hash tags here', :controller => 'instagram', :action => 'tags'%><br>
     <%= link_to 'Logout', :controller => 'session', :action => 'logout'%>
   </div>
 </div>
-<style>
-  table {border-collapse:collapse; table-layout:fixed; width:310px;}
-  table td {width:100px; word-wrap:break-word;}
-</style>
