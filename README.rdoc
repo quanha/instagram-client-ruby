@@ -1,0 +1,3 @@
+== README
+
+Due to the limitation for sandbox app, it just allows sandbox users to search for hashtag in their own media.

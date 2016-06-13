@@ -1,0 +1,49 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-md-3">
+        <%= image_tag('Instagram_icon.png', :class => 'icon') %>
+      </div>
+      <div class="col-md-3 col-md-offset-6">
+        <%= @user.username %>
+        <%= image_tag(@user.profile_picture, :class => 'icon') %>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <%= 'Hi ' + @user.full_name%>
+    <hr>
+
+    <%= form_tag("/instagram/tags", method: "POST", class:"form-group") do %>
+        <%= label_tag(:q, "Search for #Hashtags:") %>
+        <%= text_field_tag(:q, @hashtag, :class => 'form-control', :required => 'required') %>
+        <%= submit_tag("Search", :class => 'btn btn-primary', :style => 'margin-top: 10px') %>
+    <% end %>
+
+    <% if(@tags.present?) %>
+      <table class="table table-condensed table-striped .table-bordered">
+        <thead>
+        <tr>
+          <th>Hashtag</th>
+          <th>Count</th>
+          <th>Link</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @tags.each do |item| %>
+        <tr>
+          <td><%= '#'+item.name %></td>
+          <td><%= item.media_count %></td>
+          <td><%= link_to 'Link', :controller => 'instagram', :action => 'tags_result', :hashtag => item.name%><br></td>
+        </tr>
+        <% end%>
+        </tbody>
+      </table>
+    <% elsif(!@tags.nil? && @tags.blank?) %>
+        <p class="bg-danger text-danger">No results</p>
+    <% end %>
+    <hr>
+    <%= link_to 'Back to Home Page', :controller => 'instagram', :action => 'feed'%><br>
+    <%= link_to 'Logout', :controller => 'session', :action => 'logout'%>
+  </div>
+</div>

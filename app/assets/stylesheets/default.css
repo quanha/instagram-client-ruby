@@ -1,0 +1,24 @@
+.container{
+    margin: auto;
+    max-width: 570px;
+    margin-top: 10px;
+}
+
+.panel{
+    min-height: 200px;
+}
+
+.icon{
+    max-width:30px;
+    max-height:30px;
+}
+
+.images{
+    margin-top: 10px;
+    margin-right: 10px
+}
+
+.content{
+    margin-left: 10px;
+    margin-right: 10px;
+}

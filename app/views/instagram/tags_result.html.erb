@@ -1,0 +1,69 @@
+<div class="panel panel-primary" xmlns="http://www.w3.org/1999/html">
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-md-3">
+        <%= image_tag('Instagram_icon.png', :class => 'icon') %>
+      </div>
+      <div class="col-md-3 col-md-offset-6">
+        <%= @user.username %>
+        <%= image_tag(@user.profile_picture, :class => 'icon') %>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <%= 'Top Commented Instagrammer using ' + @hashtag%>
+    <hr>
+    <%
+    j = 9
+    if (@instagrammers.count < 10)
+      j = @instagrammers.count - 1
+    end
+    %>
+      <table class="table table-condensed table-striped .table-bordered">
+        <thead>
+        <tr>
+        <th style="width:20%">Order</th>
+            <th style="width:50%">Instagrammer</th>
+        <th style="width:30%">Comment Count</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% for k in 0..j%>
+          <tr>
+            <td><%= k+1 %></td>
+            <td><%= @instagrammers[k][0] %></td>
+            <td><%= @instagrammers[k][1] %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <hr>
+    <table class="table table-condensed table-striped .table-bordered" style="margin-bottom: -20px">
+      <thead>
+      <tr>
+        <th style="width:20%">Instagrammer</th>
+        <th style="width:50%">Caption/Comment</th>
+        <th style="width:30%">Date</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% for item in @posts%>
+          <tr>
+            <td><%= item[0] %></td>
+            <td><%= item[1] %></td>
+            <td><%= Time.at(Integer(item[2])).strftime("%H:%M:%S %d/%b/%Y") %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <center><%= will_paginate @posts %></center>
+    <hr>
+    <%= link_to 'Back to Hashtag Page', :controller => 'instagram', :action => 'tags'%><br>
+    <%= link_to 'Back to Home Page', :controller => 'instagram', :action => 'feed'%><br>
+    <%= link_to 'Logout', :controller => 'session', :action => 'logout'%>
+  </div>
+</div>
+<style>
+  table {border-collapse:collapse; table-layout:fixed; width:310px;}
+  table td {width:100px; word-wrap:break-word;}
+</style>
